@@ -2,8 +2,6 @@ package com.besheater.training.countrybuscompany;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +15,6 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 @ComponentScan("com.besheater.training.countrybuscompany")
 public class RootContextConfig {
-    private static final Logger LOG = LogManager.getLogger();
 
     @Autowired
     private Environment env;
