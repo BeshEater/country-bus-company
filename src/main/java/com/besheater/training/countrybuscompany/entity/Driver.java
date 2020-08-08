@@ -1,14 +1,13 @@
 package com.besheater.training.countrybuscompany.entity;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 import java.time.LocalDate;
 
+@Data
+@Log4j2
 public class Driver {
-
-    private static final Logger LOG = LogManager.getLogger();
-
     private Long id;
     private Long routePartId;
     private String firstName;
