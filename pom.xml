@@ -28,6 +28,17 @@
       <artifactId>spring-jdbc</artifactId>
       <version>5.2.8.RELEASE</version>
     </dependency>
+    <!-- Database and Connection pool -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>3.4.5</version>
+    </dependency>
     <!-- Logging -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>

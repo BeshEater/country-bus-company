@@ -1,5 +1,7 @@
 package com.besheater.training.countrybuscompany;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,7 @@ public class RootContextConfig {
 
     @Bean
     public DataSource dataSource() {
-        return null;
+        HikariConfig config = new HikariConfig("/application.properties");
+        return new HikariDataSource(config);
     }
 }
