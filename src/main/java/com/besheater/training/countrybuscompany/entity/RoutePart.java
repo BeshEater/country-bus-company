@@ -1,10 +1,10 @@
 package com.besheater.training.countrybuscompany.entity;
 
 import lombok.Data;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
-@Log4j2
+@Slf4j
 public class RoutePart {
 
     private Long id;
