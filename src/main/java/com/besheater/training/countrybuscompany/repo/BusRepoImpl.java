@@ -1,8 +1,7 @@
 package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Bus;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +9,8 @@ import javax.sql.DataSource;
 import java.util.Optional;
 
 @Repository
+@Log4j2
 public class BusRepoImpl implements BusRepo {
-
-    private static final Logger LOG = LogManager.getLogger();
 
     private JdbcTemplate jdbcTemplate;
 
