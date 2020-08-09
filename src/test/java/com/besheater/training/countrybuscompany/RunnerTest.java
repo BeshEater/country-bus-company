@@ -33,7 +33,7 @@ public class RunnerTest {
 
     @Test
     public void test1() {
-        String query = "SELECT * FROM bus";
+        String query = "SELECT * FROM main.bus";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -49,7 +49,7 @@ public class RunnerTest {
 
     @Test
     public void test2() {
-        String query = "SELECT * FROM driver";
+        String query = "SELECT * FROM main.driver";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {

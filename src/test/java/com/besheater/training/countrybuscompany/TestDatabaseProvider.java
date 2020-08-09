@@ -1,7 +1,6 @@
 package com.besheater.training.countrybuscompany;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import org.h2.jdbcx.JdbcDataSource;
 import org.h2.tools.RunScript;
 
 import javax.sql.DataSource;
@@ -18,18 +17,15 @@ public class TestDatabaseProvider {
     private static final String databaseData = readFile("/test-data.sql");
 
     public static DataSource get() {
-        HikariConfig config = new HikariConfig();
+        JdbcDataSource dataSource = new JdbcDataSource();
         String jdbcUrl = String.format("jdbc:h2:mem:test%d;" +
-                "MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;",
-                databaseNum.incrementAndGet());
-        config.setJdbcUrl(jdbcUrl);
-        config.setDriverClassName("org.h2.Driver");
-        config.setUsername("duke");
-        config.setPassword("123456");
+                        "MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1;",
+                        databaseNum.incrementAndGet());
+        dataSource.setUrl(jdbcUrl);
+        dataSource.setUser("duke");
+        dataSource.setPassword("123456");
 
-        DataSource dataSource = new HikariDataSource(config);
         initSchema(dataSource);
-
         return dataSource;
     }
 
@@ -44,8 +40,8 @@ public class TestDatabaseProvider {
 
     private static void initSchema(DataSource dataSource) {
         try (Connection connection = dataSource.getConnection()) {
-             RunScript.execute(connection, new StringReader(databaseSchema));
-             RunScript.execute(connection, new StringReader(databaseData));
+            RunScript.execute(connection, new StringReader(databaseSchema));
+            RunScript.execute(connection, new StringReader(databaseData));
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
