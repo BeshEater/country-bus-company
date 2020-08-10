@@ -3,8 +3,8 @@ package com.besheater.training.countrybuscompany;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RunnerTest {
 
-    private DataSource dataSource;
+    private EmbeddedDatabase database;
 
     @BeforeEach
     public void initDataSource() {
-        dataSource = TestDatabaseProvider.get();
+        database = TestDatabaseFactory.get();
     }
 
     @AfterEach
     public void closeDataSource() {
-        TestDatabaseProvider.close(dataSource);
+        database.shutdown();
     }
 
     @Test
@@ -35,7 +35,7 @@ public class RunnerTest {
     public void test1() {
         String query = "SELECT * FROM main.bus";
 
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = database.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             ResultSet rs = statement.executeQuery();
@@ -51,7 +51,7 @@ public class RunnerTest {
     public void test2() {
         String query = "SELECT * FROM main.driver";
 
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = database.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             ResultSet rs = statement.executeQuery();
