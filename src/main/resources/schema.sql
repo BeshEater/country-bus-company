@@ -9,7 +9,7 @@ CREATE TABLE main.route (
 
 CREATE TABLE main.bus (
   "id" BIGSERIAL PRIMARY KEY,
-  "route_id" BIGINT NOT NULL,
+  "route_id" BIGINT,
   "registration_number" VARCHAR(12) NOT NULL,
   "capacity" INT NOT NULL,
   "is_double_decker" BOOLEAN NOT NULL,

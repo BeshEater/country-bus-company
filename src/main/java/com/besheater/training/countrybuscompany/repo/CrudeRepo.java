@@ -1,16 +1,18 @@
 package com.besheater.training.countrybuscompany.repo;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface CrudeRepo<T> {
 
     Long count();
     void delete(T entity);
-    void deleteAll(Iterable<? extends T> entities);
+    void deleteAll(Collection<? extends T> entities);
     void deleteById(Long id);
     boolean existsById(Long id);
-    Iterable<T> findAll();
-    Iterable<T> findAllById(Iterable<Long> ids);
+    Collection<T> findAll();
+    Collection<T> findAllById(Collection<Long> ids);
     Optional<T> findById(Long id);
-    <S extends T> S save(S entity);
+    T save(T entity);
+    Collection<T> saveAll(Collection<? extends T> entities);
 }

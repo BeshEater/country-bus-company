@@ -5,7 +5,7 @@ SET search_path TO main, public;
 INSERT INTO route(avg_passengers_per_day) VALUES ( 125 ); /* Shymkent - Almaty */
 INSERT INTO route(avg_passengers_per_day) VALUES ( 271 ); /* Almaty - Karaganda - Nur-Sultan */
 INSERT INTO route(avg_passengers_per_day) VALUES ( 189 ); /* Nur-Sultan - Shchuchinsk - Kokshetau - Kostanay */
-INSERT INTO route(avg_passengers_per_day) VALUES ( 193 ); /* Kostanay - Chelyabinsk - Yekaterinburg */
+INSERT INTO route(avg_passengers_per_day) VALUES ( null ); /* Kostanay - Chelyabinsk - Yekaterinburg */
 INSERT INTO route(avg_passengers_per_day) VALUES ( 513 ); /* Nizhny Novgorod - Moscow - Yaroslavl */
 
 /* Buses */
@@ -13,13 +13,13 @@ INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUE
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (2, 'KZ146GK01', 120, true);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (2, 'KZ067TY01', 50, true);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (3, 'KZ335AK10', 75, false);
-INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (3, 'KZ560AK10', 75, false);
+INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (null, 'KZ560AK10', 75, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (4, 'KZ767LK10', 65, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (4, 'KZ112LK10', 75, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P097VK77RUS', 100, true);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P174VK77RUS', 100, true);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P213VK77RUS', 100, true);
-INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'C227BK77RUS', 75, false);
+INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (null, 'C227BK77RUS', 75, false);
 
 /* Routes_parts */
 INSERT INTO route_part(route_id, position) VALUES (1, 1);
