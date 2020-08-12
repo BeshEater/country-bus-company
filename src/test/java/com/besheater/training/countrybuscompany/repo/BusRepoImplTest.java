@@ -196,20 +196,20 @@ class BusRepoImplTest {
 
     @Test
     void findAllById_existingBusses_findsAll() {
-        Collection<Bus> foundedBusses = busRepo.findAllById(existingBussesIds);
-        assertIterableEquals(existingBusses, foundedBusses);
+        Collection<Bus> foundBusses = busRepo.findAllById(existingBussesIds);
+        assertIterableEquals(existingBusses, foundBusses);
     }
 
     @Test
     void findAllById_nonExistingBusses_findsNone() {
-        Collection<Bus> foundedBusses = busRepo.findAllById(nonExistingBussesIds);
-        assertTrue(foundedBusses.isEmpty());
+        Collection<Bus> foundBusses = busRepo.findAllById(nonExistingBussesIds);
+        assertTrue(foundBusses.isEmpty());
     }
 
     @Test
     void findAllById_existingAndNonExistingBusses_findsOnlyExistingBusses() {
-        Collection<Bus> foundedBusses = busRepo.findAllById(existingAndNonExistingBussesIds);
-        assertIterableEquals(existingBusses, foundedBusses);
+        Collection<Bus> foundBusses = busRepo.findAllById(existingAndNonExistingBussesIds);
+        assertIterableEquals(existingBusses, foundBusses);
     }
 
     @Test
@@ -302,7 +302,7 @@ class BusRepoImplTest {
     }
 
     @Test
-    void saveAll_existingAndNonExistingBusses_savesBusses() {
+    void saveAll_existingAndNonExistingBusses_savesAndUpdatesBusses() {
         Bus updatedBus1 = new Bus(existingBus1.getId(), new Route(5L, 513), "KK000PPP", 60, false);
         Bus updatedBus2 = new Bus(existingBus2.getId(), new Route(3L, 189), "CC111PPP", 110, true);
         Bus newBus1 = new Bus(null, new Route(4L, null), "WW000TT", 60, false);

@@ -33,7 +33,7 @@ public class BusRepoImpl implements BusRepo {
 
     @Override
     public void delete(Bus bus) {
-        jdbcTemplate.update("DELETE FROM main.bus WHERE id = ?", bus.getId());
+        deleteById(bus.getId());
     }
 
     @Override
