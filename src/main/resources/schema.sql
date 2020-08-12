@@ -13,14 +13,14 @@ CREATE TABLE main.bus (
   "registration_number" VARCHAR(12) NOT NULL,
   "capacity" INT NOT NULL,
   "is_double_decker" BOOLEAN NOT NULL,
-  CONSTRAINT bus_fk_route_id FOREIGN KEY (route_id) REFERENCES main.route(id)
+  CONSTRAINT bus_fk_route_id FOREIGN KEY (route_id) REFERENCES main.route(id) ON DELETE SET NULL
 );
 
 CREATE TABLE main.route_part (
   "id" BIGSERIAL PRIMARY KEY,
   "route_id" BIGINT NOT NULL,
   "position" INT NOT NULL,
-  CONSTRAINT route_part_fk_route_id FOREIGN KEY (route_id) REFERENCES main.route(id)
+  CONSTRAINT route_part_fk_route_id FOREIGN KEY (route_id) REFERENCES main.route(id) ON DELETE CASCADE
 );
 
 CREATE TABLE main.driver (
@@ -32,7 +32,7 @@ CREATE TABLE main.driver (
   "address" VARCHAR(100) NOT NULL,
   "driver_licence_number" VARCHAR(20),
   "phone_number" VARCHAR(20),
-  CONSTRAINT driver_fk_route_part_id FOREIGN KEY (route_part_id) REFERENCES main.route_part(id)
+  CONSTRAINT driver_fk_route_part_id FOREIGN KEY (route_part_id) REFERENCES main.route_part(id) ON DELETE SET NULL
 );
 
 CREATE TABLE main.town (
@@ -50,7 +50,7 @@ CREATE TABLE main.garage (
   "name" VARCHAR(20) NOT NULL,
   "address" VARCHAR(100) NOT NULL,
   "capacity" INT NOT NULL,
-  CONSTRAINT garage_fk_town_id FOREIGN KEY (town_id) REFERENCES main.town(id)
+  CONSTRAINT garage_fk_town_id FOREIGN KEY (town_id) REFERENCES main.town(id) ON DELETE CASCADE
 );
 
 CREATE TABLE main.transit (
@@ -59,7 +59,7 @@ CREATE TABLE main.transit (
   "from_town_id" BIGINT NOT NULL,
   "to_town_id" BIGINT NOT NULL,
   "position" INT NOT NULL,
-  CONSTRAINT transit_fk_route_part_id FOREIGN KEY (route_part_id) REFERENCES main.route_part(id),
-  CONSTRAINT transit_fk_from_town_id FOREIGN KEY (from_town_id) REFERENCES main.town(id),
-  CONSTRAINT transit_fk_to_town_id FOREIGN KEY (to_town_id) REFERENCES main.town(id)
+  CONSTRAINT transit_fk_route_part_id FOREIGN KEY (route_part_id) REFERENCES main.route_part(id) ON DELETE CASCADE,
+  CONSTRAINT transit_fk_from_town_id FOREIGN KEY (from_town_id) REFERENCES main.town(id) ON DELETE CASCADE,
+  CONSTRAINT transit_fk_to_town_id FOREIGN KEY (to_town_id) REFERENCES main.town(id) ON DELETE CASCADE
 );
