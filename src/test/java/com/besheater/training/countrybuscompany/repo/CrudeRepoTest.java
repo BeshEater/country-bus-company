@@ -52,7 +52,21 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
 
     public CrudeRepoTest() { }
 
-    public void init() {
+    @BeforeEach
+    public void initDataSource() {
+        database = TestDatabaseFactory.get();
+        init();
+        initHelperCollections();
+    }
+
+    @AfterEach
+    public void closeDataSource() {
+        database.shutdown();
+    }
+
+    public abstract void init();
+
+    private void initHelperCollections() {
         existingEntities =
                 Arrays.asList(existingEntity1, existingEntity2, existingEntity3);
         updatedExistingEntities =
@@ -80,16 +94,6 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
         return collection.stream()
                          .map(IdEntity::getId)
                          .collect(Collectors.toList());
-    }
-
-    @BeforeEach
-    public void initDataSource() {
-        database = TestDatabaseFactory.get();
-    }
-
-    @AfterEach
-    public void closeDataSource() {
-        database.shutdown();
     }
 
     @Test

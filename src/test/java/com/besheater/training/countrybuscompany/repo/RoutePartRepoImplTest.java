@@ -2,11 +2,12 @@ package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Route;
 import com.besheater.training.countrybuscompany.entity.RoutePart;
-import org.junit.jupiter.api.BeforeEach;
 
 class RoutePartRepoImplTest extends CrudeRepoTest<RoutePart> {
 
-    public RoutePartRepoImplTest() {
+    @Override
+    public void init() {
+        entityRepo = new RoutePartRepoImpl(database, new RouteRepoImpl(database));
 
         entityCount = 8L;
 
@@ -25,12 +26,5 @@ class RoutePartRepoImplTest extends CrudeRepoTest<RoutePart> {
         newEntity1 = new RoutePart(null, new Route(1L, 125), 1);
         newEntity2 = new RoutePart(null, new Route(3L, 189), 2);
         newEntity3 = new RoutePart(null, new Route(4L, null), 3);
-
-        init();
-    }
-
-    @BeforeEach
-    public void initEntityRepo() {
-        entityRepo = new RoutePartRepoImpl(database, new RouteRepoImpl(database));
     }
 }

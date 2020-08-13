@@ -1,11 +1,13 @@
 package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Route;
-import org.junit.jupiter.api.BeforeEach;
 
 class RouteRepoImplTest extends CrudeRepoTest<Route> {
 
-    public RouteRepoImplTest() {
+    @Override
+    public void init() {
+        entityRepo = new RouteRepoImpl(database);
+
         entityCount = 5L;
 
         existingEntity1 = new Route(1L, 125);
@@ -23,12 +25,5 @@ class RouteRepoImplTest extends CrudeRepoTest<Route> {
         newEntity1 = new Route(null, 389);
         newEntity2 = new Route(null, 85);
         newEntity3 = new Route(null, null);
-
-        init();
-    }
-
-    @BeforeEach
-    public void initEntityRepo() {
-        entityRepo = new RouteRepoImpl(database);
     }
 }
