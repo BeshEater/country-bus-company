@@ -30,7 +30,7 @@ public class RouteRepoImpl implements RouteRepo {
 
     @Override
     public void delete(Route route) {
-        jdbcTemplate.update("DELETE FROM main.route WHERE id = ?", route.getId());
+        deleteById(route.getId());
     }
 
     @Override
