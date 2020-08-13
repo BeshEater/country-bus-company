@@ -10,7 +10,7 @@ import java.util.Objects;
 @Slf4j
 @Data
 @AllArgsConstructor
-public class Bus {
+public class Bus implements IdEntity{
 
     private Long id;
     private Route route;
