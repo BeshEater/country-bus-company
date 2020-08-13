@@ -9,7 +9,7 @@ import java.util.Objects;
 @Slf4j
 @Data
 @AllArgsConstructor
-public class Route {
+public class Route implements IdEntity{
 
     private Long id;
     private Integer averagePassengersPerDay;
