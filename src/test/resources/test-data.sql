@@ -50,7 +50,7 @@ INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
 );
 INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
                    driver_licence_number, phone_number) VALUES (
-3, 'Ivan', 'Samoylov', '1993-10-21', 'Shchuchinsk Abaya 67', '219122', '+77781997888'
+3, 'Ivan', 'Samoylov', '1993-10-21', 'Shchuchinsk Abaya 67', '219122', null
 );
 INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
                    driver_licence_number, phone_number) VALUES (
@@ -62,11 +62,11 @@ INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
 );
 INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
                    driver_licence_number, phone_number) VALUES (
-5, 'Kim', 'Ivanov', '1979-02-22', 'Kostanay Shayahmetov 41', '205700', '+77057059899'
+5, 'Dmitriy', 'Letunov', '1979-02-22', 'Kostanay Shayahmetov 41', '205700', '+77057059899'
 );
 INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
                    driver_licence_number, phone_number) VALUES (
-6, 'Dmitriy', 'Letunov', '1987-09-15', 'Yekaterinburg Tolstoy 245, apt. 7', '200981', '+778913091324'
+6, 'Kim', 'Ivanov', '1987-09-15', 'Yekaterinburg Tolstoy 245, apt. 7', null, '+778913091324'
 );
 INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
                    driver_licence_number, phone_number) VALUES (
