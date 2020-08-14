@@ -20,6 +20,9 @@ public class RouteRepoImpl implements RouteRepo {
     private JdbcTemplate jdbcTemplate;
 
     public RouteRepoImpl(DataSource dataSource) {
+        if (dataSource == null) {
+            throw new NullPointerException("DataSource cannot be null");
+        }
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

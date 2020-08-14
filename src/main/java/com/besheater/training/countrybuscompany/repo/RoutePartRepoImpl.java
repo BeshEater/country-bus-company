@@ -22,6 +22,12 @@ public class RoutePartRepoImpl implements RoutePartRepo {
     private RouteRepo routeRepo;
 
     public RoutePartRepoImpl(DataSource dataSource, RouteRepo routeRepo) {
+        if (dataSource == null) {
+            throw new NullPointerException("DataSource cannot be null");
+        }
+        if (routeRepo == null) {
+            throw new NullPointerException("RouteRepo cannot be null");
+        }
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.routeRepo = routeRepo;
     }

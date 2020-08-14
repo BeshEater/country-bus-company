@@ -3,8 +3,11 @@ package com.besheater.training.countrybuscompany.repo;
 import com.besheater.training.countrybuscompany.entity.Driver;
 import com.besheater.training.countrybuscompany.entity.Route;
 import com.besheater.training.countrybuscompany.entity.RoutePart;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DriverRepoImplTest extends CrudeRepoTest<Driver>{
 
@@ -139,5 +142,14 @@ class DriverRepoImplTest extends CrudeRepoTest<Driver>{
                 .driverLicenseNumber("4789631")
                 .phoneNumber("+4478963145487")
                 .build();
+    }
+
+    @Test
+    void constructor_nullArguments_throwsException() {
+        RoutePartRepo routePartRepo = new RoutePartRepoImpl(database, new RouteRepoImpl(database));
+
+        assertThrows(NullPointerException.class, () -> new DriverRepoImpl(null, routePartRepo));
+        assertThrows(NullPointerException.class, () -> new DriverRepoImpl(database, null));
+        assertThrows(NullPointerException.class, () -> new DriverRepoImpl(null, null));
     }
 }

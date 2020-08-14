@@ -22,6 +22,12 @@ public class BusRepoImpl implements BusRepo {
     private RouteRepo routeRepo;
 
     public BusRepoImpl(DataSource dataSource, RouteRepo routeRepo) {
+        if (dataSource == null) {
+            throw new NullPointerException("DataSource cannot be null");
+        }
+        if (routeRepo == null) {
+            throw new NullPointerException("RouteRepo cannot be null");
+        }
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.routeRepo = routeRepo;
     }

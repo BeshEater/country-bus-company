@@ -1,6 +1,9 @@
 package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Route;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RouteRepoImplTest extends CrudeRepoTest<Route> {
 
@@ -25,5 +28,10 @@ class RouteRepoImplTest extends CrudeRepoTest<Route> {
         newEntity1 = new Route(null, 389);
         newEntity2 = new Route(null, 85);
         newEntity3 = new Route(null, null);
+    }
+
+    @Test
+    void constructor_nullArguments_throwsException() {
+        assertThrows(NullPointerException.class, () -> new RouteRepoImpl(null));
     }
 }

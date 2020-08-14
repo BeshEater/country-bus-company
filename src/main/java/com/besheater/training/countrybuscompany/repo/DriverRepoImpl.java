@@ -23,6 +23,12 @@ public class DriverRepoImpl implements DriverRepo {
     private RoutePartRepo routePartRepo;
 
     public DriverRepoImpl(DataSource dataSource, RoutePartRepo routePartRepo) {
+        if (dataSource == null) {
+            throw new NullPointerException("DataSource cannot be null");
+        }
+        if (routePartRepo == null) {
+            throw new NullPointerException("RoutePartRepo cannot be null");
+        }
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         this.routePartRepo = routePartRepo;
     }
