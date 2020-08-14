@@ -47,7 +47,7 @@ CREATE TABLE main.town (
 CREATE TABLE main.garage (
   "id" BIGSERIAL PRIMARY KEY,
   "town_id" BIGINT NOT NULL,
-  "name" VARCHAR(20) NOT NULL,
+  "name" VARCHAR(30) NOT NULL,
   "address" VARCHAR(100) NOT NULL,
   "capacity" INT NOT NULL,
   CONSTRAINT garage_fk_town_id FOREIGN KEY (town_id) REFERENCES main.town(id) ON DELETE CASCADE
