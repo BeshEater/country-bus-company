@@ -87,40 +87,40 @@ INSERT INTO driver(route_part_id, first_name, last_name, date_of_birth, address,
 
 /* Towns */
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Shymkent', 'KAZ', NULL, 42.296, 69.5999
+'Shymkent', 'KAZ', NULL, 42.2960, 69.5999
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Almaty', 'KAZ', NULL, 43.2775, 76.895833
+'Almaty', 'KAZ', NULL, 43.2775, 76.8958
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Karaganda', 'KAZ', 'Karaganda Region', 49.802803, 73.087898
+'Karaganda', 'KAZ', 'Karaganda Region', 49.8028, 73.0878
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Nur-Sultan', 'KAZ', NULL, 51.166667, 71.433333
+'Nur-Sultan', 'KAZ', NULL, 51.1666, 71.4333
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Shchuchinsk', 'KAZ', 'Akmola Region', 52.936385, 70.182669
+'Shchuchinsk', 'KAZ', 'Akmola Region', 52.9363, 70.1826
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Kokshetau', 'KAZ', 'Akmola Region', 53.283333, 69.383333
+'Kokshetau', 'KAZ', 'Akmola Region', 53.2833, 69.3833
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Kostanay', 'KAZ', 'Kostanay Region', 53.211871, 63.632564
+'Kostanay', 'KAZ', 'Kostanay Region', 53.2118, 63.6325
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Chelyabinsk', 'RUS', 'Chelyabinsk Oblast', 55.154722, 61.375833
+'Chelyabinsk', 'RUS', 'Chelyabinsk Oblast', 55.1547, 61.3758
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Yekaterinburg', 'RUS', 'Sverdlovsk Oblast', 55.154722, 61.375833
+'Yekaterinburg', 'RUS', 'Sverdlovsk Oblast', 55.1547, 61.3758
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Nizhny Novgorod', 'RUS', 'Nizhny Novgorod Oblast', 56.326944, 44.0075
+'Nizhny Novgorod', 'RUS', 'Nizhny Novgorod Oblast', 56.3269, 44.0075
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Moscow', 'RUS', 'Central Federal District', 55.755833, 37.617222
+'Moscow', 'RUS', 'Central Federal District', 55.7558, 37.6172
 );
 INSERT INTO town(name, country_code, region, latitude, longitude) VALUES (
-'Yaroslavl', 'RUS', 'Yaroslavl Oblast', 57.616667, 39.8506
+'Yaroslavl', 'RUS', 'Yaroslavl Oblast', 57.6166, 39.8506
 );
 
 /* Garages */
