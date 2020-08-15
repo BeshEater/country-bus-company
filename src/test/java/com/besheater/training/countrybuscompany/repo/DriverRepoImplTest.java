@@ -6,6 +6,7 @@ import com.besheater.training.countrybuscompany.entity.RoutePart;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -142,6 +143,22 @@ class DriverRepoImplTest extends CrudeRepoTest<Driver>{
                 .driverLicenseNumber("4789631")
                 .phoneNumber("+4478963145487")
                 .build();
+    }
+
+    @Override
+    public Long getEntityId(Driver driver) {
+        return driver.getId();
+    }
+
+    @Override
+    public boolean entitiesEqualsWithoutId(Driver driver1, Driver driver2) {
+        return Objects.equals(driver1.getRoutePart(), driver2.getRoutePart()) &&
+                driver1.getFirstName().equals(driver2.getFirstName()) &&
+                driver1.getLastName().equals(driver2.getLastName()) &&
+                driver1.getDateOfBirth().equals(driver2.getDateOfBirth()) &&
+                driver1.getAddress().equals(driver2.getAddress()) &&
+                Objects.equals(driver1.getDriverLicenseNumber(), driver2.getDriverLicenseNumber()) &&
+                Objects.equals(driver1.getPhoneNumber(), driver2.getPhoneNumber());
     }
 
     @Test

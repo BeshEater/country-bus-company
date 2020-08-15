@@ -108,6 +108,19 @@ class TransitRepoImplTest extends CrudeRepoTest<Transit> {
                 .build();
     }
 
+    @Override
+    public Long getEntityId(Transit transit) {
+        return transit.getId();
+    }
+
+    @Override
+    public boolean entitiesEqualsWithoutId(Transit transit1, Transit transit2) {
+        return transit1.getRoutePart().equals(transit2.getRoutePart()) &&
+                transit1.getFromTown().equals(transit2.getFromTown()) &&
+                transit1.getToTown().equals(transit2.getToTown()) &&
+                transit1.getPosition().equals(transit2.getPosition());
+    }
+
     @Test
     void constructor_nullArguments_throwsException() {
         RouteRepo routeRepo = new RouteRepoImpl(database);

@@ -3,6 +3,8 @@ package com.besheater.training.countrybuscompany.repo;
 import com.besheater.training.countrybuscompany.entity.Route;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RouteRepoImplTest extends CrudeRepoTest<Route> {
@@ -28,6 +30,16 @@ class RouteRepoImplTest extends CrudeRepoTest<Route> {
         newEntity1 = new Route(null, 389);
         newEntity2 = new Route(null, 85);
         newEntity3 = new Route(null, null);
+    }
+
+    @Override
+    public Long getEntityId(Route route) {
+        return route.getId();
+    }
+
+    @Override
+    public boolean entitiesEqualsWithoutId(Route route1, Route route2) {
+        return Objects.equals(route1.getAveragePassengersPerDay(), route2.getAveragePassengersPerDay());
     }
 
     @Test

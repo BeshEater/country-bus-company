@@ -1,7 +1,6 @@
 package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.TestDatabaseFactory;
-import com.besheater.training.countrybuscompany.entity.IdEntity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class CrudeRepoTest<T extends IdEntity> {
+public abstract class CrudeRepoTest<T> {
 
     protected EmbeddedDatabase database;
     protected CrudeRepo<T> entityRepo;
@@ -66,6 +65,10 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
 
     public abstract void init();
 
+    public abstract Long getEntityId(T entity);
+
+    public abstract boolean entitiesEqualsWithoutId(T entity1, T entity2);
+
     private void initHelperCollections() {
         existingEntities =
                 Arrays.asList(existingEntity1, existingEntity2, existingEntity3);
@@ -92,15 +95,15 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
 
     private List<Long> extractIds(Collection<T> collection) {
         return collection.stream()
-                         .map(IdEntity::getId)
+                         .map(this::getEntityId)
                          .collect(Collectors.toList());
     }
 
     @Test
     void count_returnsExpectedValue() {
         assertEquals(entityCount, entityRepo.count());
-        entityRepo.deleteById(existingEntity1.getId());
-        entityRepo.deleteById(existingEntity2.getId());
+        entityRepo.deleteById(getEntityId(existingEntity1));
+        entityRepo.deleteById(getEntityId(existingEntity2));
         assertEquals(entityCount - 2, entityRepo.count());
     }
 
@@ -112,19 +115,19 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
     @Test
     void delete_existingEntity_deletesEntity() {
         assertEquals(entityCount, entityRepo.count());
-        assertTrue(entityRepo.existsById(existingEntity2.getId()));
+        assertTrue(entityRepo.existsById(getEntityId(existingEntity2)));
         entityRepo.delete((T) existingEntity2);
         assertEquals(entityCount - 1, entityRepo.count());
-        assertFalse(entityRepo.existsById(existingEntity2.getId()));
+        assertFalse(entityRepo.existsById(getEntityId(existingEntity2)));
     }
 
     @Test
     void delete_nonExistingEntity_deletesNone() {
         assertEquals(entityCount, entityRepo.count());
-        assertFalse(entityRepo.findById(nonExistingEntity3.getId()).isPresent());
+        assertFalse(entityRepo.findById(getEntityId(nonExistingEntity3)).isPresent());
         entityRepo.delete(nonExistingEntity3);
         assertEquals(entityCount, entityRepo.count());
-        assertFalse(entityRepo.findById(nonExistingEntity3.getId()).isPresent());
+        assertFalse(entityRepo.findById(getEntityId(nonExistingEntity3)).isPresent());
     }
 
     @Test
@@ -169,19 +172,19 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
     @Test
     void deleteById_existingId_deletesEntity() {
         assertEquals(entityCount, entityRepo.count());
-        assertTrue(entityRepo.existsById(existingEntity3.getId()));
-        entityRepo.deleteById(existingEntity3.getId());
+        assertTrue(entityRepo.existsById(getEntityId(existingEntity3)));
+        entityRepo.deleteById(getEntityId(existingEntity3));
         assertEquals(entityCount - 1, entityRepo.count());
-        assertFalse(entityRepo.existsById(existingEntity3.getId()));
+        assertFalse(entityRepo.existsById(getEntityId(existingEntity3)));
     }
 
     @Test
     void deleteById_nonExistingId_deletesNone() {
         assertEquals(entityCount, entityRepo.count());
-        assertFalse(entityRepo.existsById(nonExistingEntity2.getId()));
-        entityRepo.deleteById(nonExistingEntity2.getId());
+        assertFalse(entityRepo.existsById(getEntityId(nonExistingEntity2)));
+        entityRepo.deleteById(getEntityId(nonExistingEntity2));
         assertEquals(entityCount, entityRepo.count());
-        assertFalse(entityRepo.existsById(nonExistingEntity2.getId()));
+        assertFalse(entityRepo.existsById(getEntityId(nonExistingEntity2)));
     }
 
     @Test
@@ -191,16 +194,16 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
 
     @Test
     void existsById_existingId_returnsTrue() {
-        assertTrue(entityRepo.existsById(existingEntity1.getId()));
-        assertTrue(entityRepo.existsById(existingEntity2.getId()));
-        assertTrue(entityRepo.existsById(existingEntity3.getId()));
+        assertTrue(entityRepo.existsById(getEntityId(existingEntity1)));
+        assertTrue(entityRepo.existsById(getEntityId(existingEntity2)));
+        assertTrue(entityRepo.existsById(getEntityId(existingEntity3)));
     }
 
     @Test
     void existsById_nonExistingId_returnsFalse() {
-        assertFalse(entityRepo.existsById(nonExistingEntity1.getId()));
-        assertFalse(entityRepo.existsById(nonExistingEntity2.getId()));
-        assertFalse(entityRepo.existsById(nonExistingEntity3.getId()));
+        assertFalse(entityRepo.existsById(getEntityId(nonExistingEntity1)));
+        assertFalse(entityRepo.existsById(getEntityId(nonExistingEntity2)));
+        assertFalse(entityRepo.existsById(getEntityId(nonExistingEntity3)));
     }
 
     @Test
@@ -242,16 +245,16 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
 
     @Test
     void findById_existingId_returnsEntity() {
-        assertEquals(existingEntity1, entityRepo.findById(existingEntity1.getId()).get());
-        assertEquals(existingEntity2, entityRepo.findById(existingEntity2.getId()).get());
-        assertEquals(existingEntity3, entityRepo.findById(existingEntity3.getId()).get());
+        assertEquals(existingEntity1, entityRepo.findById(getEntityId(existingEntity1)).get());
+        assertEquals(existingEntity2, entityRepo.findById(getEntityId(existingEntity2)).get());
+        assertEquals(existingEntity3, entityRepo.findById(getEntityId(existingEntity3)).get());
     }
 
     @Test
     void findById_nonExistingId_returnsNone() {
-        assertFalse(entityRepo.findById(nonExistingEntity1.getId()).isPresent());
-        assertFalse(entityRepo.findById(nonExistingEntity2.getId()).isPresent());
-        assertFalse(entityRepo.findById(nonExistingEntity3.getId()).isPresent());
+        assertFalse(entityRepo.findById(getEntityId(nonExistingEntity1)).isPresent());
+        assertFalse(entityRepo.findById(getEntityId(nonExistingEntity2)).isPresent());
+        assertFalse(entityRepo.findById(getEntityId(nonExistingEntity3)).isPresent());
     }
 
     @Test
@@ -265,7 +268,7 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
         assertNotEquals(existingEntity3, updatedExistingEntity3);
         T savedEntity = entityRepo.save(updatedExistingEntity3);
         assertEquals(updatedExistingEntity3, savedEntity);
-        assertEquals(updatedExistingEntity3, entityRepo.findById(updatedExistingEntity3.getId()).get());
+        assertEquals(updatedExistingEntity3, entityRepo.findById(getEntityId(updatedExistingEntity3)).get());
         assertEquals(entityCount, entityRepo.count());
     }
 
@@ -274,8 +277,8 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
         assertEquals(entityCount, entityRepo.count());
         T savedEntity = entityRepo.save(newEntity2);
         assertEquals(entityCount + 1, entityRepo.count());
-        assertEquals(entityCount + 1, savedEntity.getId());
-        assertTrue(savedEntity.equalsWithoutId(newEntity2));
+        assertEquals(entityCount + 1, getEntityId(savedEntity));
+        assertTrue(entitiesEqualsWithoutId(savedEntity, newEntity2));
     }
 
     @Test
@@ -309,8 +312,9 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
         for (int i = 0; i < newEntities.size(); i++) {
             T newEntity = newEntities.get(i);
             T savedEntity = savedEntities.get(i);
-            assertTrue(newEntity.equalsWithoutId(savedEntity));
-            assertTrue(newEntity.equalsWithoutId(entityRepo.findById(savedEntity.getId()).get()));
+            T entityFromRepo = entityRepo.findById(getEntityId(savedEntity)).get();
+            assertTrue(entitiesEqualsWithoutId(newEntity, savedEntity));
+            assertTrue(entitiesEqualsWithoutId(newEntity, entityFromRepo));
         }
     }
 
@@ -322,8 +326,9 @@ public abstract class CrudeRepoTest<T extends IdEntity> {
         for (int i = 0; i < newAndUpdatedEntities.size(); i++) {
             T newOrUpdatedEntity = newAndUpdatedEntities.get(i);
             T savedEntity = savedEntities.get(i);
-            assertTrue(newOrUpdatedEntity.equalsWithoutId(savedEntity));
-            assertTrue(newOrUpdatedEntity.equalsWithoutId(entityRepo.findById(savedEntity.getId()).get()));
+            T entityFromRepo = entityRepo.findById(getEntityId(savedEntity)).get();
+            assertTrue(entitiesEqualsWithoutId(newOrUpdatedEntity, savedEntity));
+            assertTrue(entitiesEqualsWithoutId(newOrUpdatedEntity, entityFromRepo));
         }
     }
 

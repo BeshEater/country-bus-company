@@ -3,6 +3,8 @@ package com.besheater.training.countrybuscompany.repo;
 import com.besheater.training.countrybuscompany.entity.Town;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TownRepoImplTest extends CrudeRepoTest<Town> {
@@ -28,6 +30,20 @@ class TownRepoImplTest extends CrudeRepoTest<Town> {
         newEntity1 = new Town(null, "Aktobe", "KAZ", "Aktobe Region", 50.2908, 57.1614);
         newEntity2 = new Town(null, "Rio de Janeiro", "BRA", "Southeast", -22.9083, -43.1963);
         newEntity3 = new Town(null, "Minsk", "BLR", null,53.9100, 27.5666);
+    }
+
+    @Override
+    public Long getEntityId(Town town) {
+        return town.getId();
+    }
+
+    @Override
+    public boolean entitiesEqualsWithoutId(Town town1, Town town2) {
+        return town1.getName().equals(town2.getName()) &&
+                town1.getCountryCode().equals(town2.getCountryCode()) &&
+                Objects.equals(town1.getRegion(), town2.getRegion()) &&
+                town1.getLatitude().equals(town2.getLatitude()) &&
+                town1.getLongitude().equals(town2.getLongitude());
     }
 
     @Test

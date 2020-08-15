@@ -55,6 +55,19 @@ class GarageRepoImplTest extends CrudeRepoTest<Garage> {
                 "Hangar 78/96 ", "Lenina 14", 6);
     }
 
+    @Override
+    public Long getEntityId(Garage garage) {
+        return garage.getId();
+    }
+
+    @Override
+    public boolean entitiesEqualsWithoutId(Garage garage1, Garage garage2) {
+        return garage1.getTown().equals(garage2.getTown()) &&
+                garage1.getName().equals(garage2.getName()) &&
+                garage1.getAddress().equals(garage2.getAddress()) &&
+                garage1.getCapacity().equals(garage2.getCapacity());
+    }
+
     @Test
     void constructor_nullArguments_throwsException() {
         TownRepo townRepo = new TownRepoImpl(database);
