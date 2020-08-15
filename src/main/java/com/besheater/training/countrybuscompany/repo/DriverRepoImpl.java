@@ -1,6 +1,7 @@
 package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Driver;
+import com.besheater.training.countrybuscompany.entity.Route;
 import com.besheater.training.countrybuscompany.entity.RoutePart;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -159,6 +160,17 @@ public class DriverRepoImpl implements DriverRepo {
         return drivers.stream()
                       .map(this::save)
                       .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Driver> getDriversOnRoute(Route route) {
+        Long routeId = route.getId();
+        String query = "SELECT d.id, d.route_part_id, d.first_name, d.last_name, " +
+                "d.date_of_birth, d.address, d.driver_licence_number, d.phone_number " +
+                "FROM main.driver AS d " +
+                "LEFT JOIN main.route_part AS route_part ON route_part.id = d.route_part_id " +
+                "WHERE route_part.route_id = ?";
+        return jdbcTemplate.query(query, new DriverRowMapper(), routeId);
     }
 
     private class DriverRowMapper implements RowMapper<Driver> {
