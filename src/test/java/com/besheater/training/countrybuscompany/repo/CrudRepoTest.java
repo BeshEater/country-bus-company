@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class CrudeRepoTest<T> {
+public abstract class CrudRepoTest<T> {
 
     protected EmbeddedDatabase database;
-    protected CrudeRepo<T> entityRepo;
+    protected CrudRepo<T> entityRepo;
 
     protected Long entityCount;
 
@@ -49,7 +49,7 @@ public abstract class CrudeRepoTest<T> {
     private List<Long> nonExistingEntitiesIds;
     private List<Long> existingAndNonExistingEntitiesIds;
 
-    public CrudeRepoTest() { }
+    public CrudRepoTest() { }
 
     @BeforeEach
     public void initDataSource() {

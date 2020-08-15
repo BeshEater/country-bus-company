@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BusRepoImplTest extends CrudeRepoTest<Bus>{
+class BusRepoImplTest extends CrudRepoTest<Bus> {
 
     private BusRepoImpl busRepo;
 

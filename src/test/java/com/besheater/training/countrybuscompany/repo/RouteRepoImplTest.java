@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class RouteRepoImplTest extends CrudeRepoTest<Route> {
+class RouteRepoImplTest extends CrudRepoTest<Route> {
 
     @Override
     public void init() {

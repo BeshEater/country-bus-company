@@ -3,7 +3,7 @@ package com.besheater.training.countrybuscompany.repo;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface CrudeRepo<T> {
+public interface CrudRepo<T> {
 
     Long count();
     void delete(T entity);

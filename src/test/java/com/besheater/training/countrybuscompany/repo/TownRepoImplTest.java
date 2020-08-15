@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TownRepoImplTest extends CrudeRepoTest<Town> {
+class TownRepoImplTest extends CrudRepoTest<Town> {
 
     @Override
     public void init() {

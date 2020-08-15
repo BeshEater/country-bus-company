@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class GarageRepoImplTest extends CrudeRepoTest<Garage> {
+class GarageRepoImplTest extends CrudRepoTest<Garage> {
 
     @Override
     public void init() {

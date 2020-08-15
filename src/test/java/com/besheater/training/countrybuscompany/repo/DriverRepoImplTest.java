@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class DriverRepoImplTest extends CrudeRepoTest<Driver>{
+class DriverRepoImplTest extends CrudRepoTest<Driver> {
 
     @Override
     public void init() {
