@@ -155,6 +155,13 @@ public class BusRepoImpl implements BusRepo {
                     .collect(Collectors.toList());
     }
 
+    @Override
+    public Collection<Bus> getBussesOnRoute(Route route) {
+        Long route_id = route.getId();
+        String query = "SELECT * FROM main.bus WHERE route_id = ?";
+        return jdbcTemplate.query(query, new BusRowMapper(), route_id);
+    }
+
     private class BusRowMapper implements RowMapper<Bus> {
 
         @Override

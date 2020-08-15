@@ -17,8 +17,8 @@ INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUE
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (4, 'KZ767LK10', 65, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (4, 'KZ112LK10', 75, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P097VK77RUS', 100, true);
-INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P174VK77RUS', 100, true);
-INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P213VK77RUS', 100, true);
+INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P174VK77RUS', 120, true);
+INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (5, 'P213VK77RUS', 70, false);
 INSERT INTO bus(route_id, registration_number, capacity, is_double_decker) VALUES (null, 'C227BK77RUS', 75, false);
 
 /* Routes_parts */

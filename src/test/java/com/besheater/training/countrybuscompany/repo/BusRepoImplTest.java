@@ -2,13 +2,18 @@ package com.besheater.training.countrybuscompany.repo;
 
 import com.besheater.training.countrybuscompany.entity.Bus;
 import com.besheater.training.countrybuscompany.entity.Route;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BusRepoImplTest extends CrudeRepoTest<Bus>{
+
+    private BusRepoImpl busRepo;
 
     @Override
     public void init() {
@@ -46,6 +51,12 @@ class BusRepoImplTest extends CrudeRepoTest<Bus>{
                 bus1.getCapacity().equals(bus2.getCapacity());
     }
 
+    @BeforeEach
+    public void initBusRepo() {
+        RouteRepo routeRepo = new RouteRepoImpl(database);
+        busRepo = new BusRepoImpl(database, routeRepo);
+    }
+
     @Test
     void constructor_nullArguments_throwsException() {
         RouteRepo routeRepo = new RouteRepoImpl(database);
@@ -53,5 +64,30 @@ class BusRepoImplTest extends CrudeRepoTest<Bus>{
         assertThrows(NullPointerException.class, () -> new BusRepoImpl(null, routeRepo));
         assertThrows(NullPointerException.class, () -> new BusRepoImpl(database, null));
         assertThrows(NullPointerException.class, () -> new BusRepoImpl(null, null));
+    }
+
+    @Test
+    void getBussesOnRoute_nullArgument_throwsException() {
+        assertThrows(NullPointerException.class, () -> busRepo.getBussesOnRoute(null));
+    }
+
+    @Test
+    void getBussesOnRoute_existingRoute_returnsBussesOnThatRoute() {
+        Route route1 = new Route(1L, 125);
+        Route route2 = new Route(5L, 513);
+
+        List<Bus> bussesOnRoute1 = Arrays.asList(new Bus(1L, route1, "KZ726GK01", 65, false));
+        List<Bus> bussesOnRoute2 = Arrays.asList(
+                new Bus(8L, route2, "P097VK77RUS", 100, true),
+                new Bus(9L, route2, "P174VK77RUS", 120, true),
+                new Bus(10L, route2, "P213VK77RUS", 70, false));
+        assertIterableEquals(bussesOnRoute1, busRepo.getBussesOnRoute(route1));
+        assertIterableEquals(bussesOnRoute2, busRepo.getBussesOnRoute(route2));
+    }
+
+    @Test
+    void getBussesOnRoute_nonExistingRoute_returnsEmptyCollection() {
+        Route nonExistingRoute = new Route(7L, null);
+        assertTrue(busRepo.getBussesOnRoute(nonExistingRoute).isEmpty());
     }
 }
